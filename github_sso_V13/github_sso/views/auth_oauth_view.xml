@@ -1,0 +1,36 @@
+<odoo>
+  <data>
+
+    <record id="auth_oauth_user_form" model="ir.ui.view">
+      <field name="name">auth.oauth.provider.form</field>
+      <field name="model">auth.oauth.provider</field>
+      <field name="inherit_id" ref="auth_oauth.view_oauth_provider_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='name']" position="after">
+          <field name="application"/>
+          <field name="client_secret_key"/>
+          <field name="redirect_url"/>
+        </xpath>
+
+        <xpath expr="//field[@name='client_secret_key']" position="attributes">
+          <attribute name="attrs">
+            {'invisible': [('application', '!=', 'github')]}
+          </attribute>
+        </xpath>
+
+        <xpath expr="//field[@name='data_endpoint']" position="attributes">
+          <attribute name="attrs">
+            {'invisible': [('application', '!=', 'other')]}
+          </attribute>
+        </xpath>
+
+        <xpath expr="//field[@name='redirect_url']" position="attributes">
+          <attribute name="attrs">
+            {'invisible': [('application', '!=', 'github')]}
+          </attribute>
+        </xpath>
+      </field>
+    </record>
+    
+  </data>
+</odoo>
